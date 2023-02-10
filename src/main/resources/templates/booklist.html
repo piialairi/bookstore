@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"><head>
 <meta charset="ISO-8859-1">
+<link type="text/css" rel="stylesheet" href="/css/css/bootstrap.min.css" th:href="@{/css/css/bootstrap.min.css}" />
 <title>Booklist</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 	<h1>Booklist</h1>
-	<table>
+	<table class="table table striped">
 		<tbody>
 			<tr th:each = "book: ${books}">
 				<td th:text="${book.title}">Kirjan nimi</td>
 				<td th:text="${book.author}">Kirjailija</td>
-				<td> <a th:href="@{delete/{id}(id=${book.id})}">Delete</a></td>
+				<td> <a class="btn btn-danger" th:href="@{delete/{id}(id=${book.id})}">Delete</a></td>
+				<td><a th:href="@{edit/{id}(id=${book.id})}">Edit</a></td>
 			</tr>
 		</tbody>
 		</table>
-			<p><a href="/addbook">Add new book</a></p>
+			<p><a href="/addbook" class="btn btn-success">Add new book</a></p>
 
 </body>
 </html>
