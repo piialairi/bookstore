@@ -1,14 +1,19 @@
 package hhsof3as3.bookstore.domain;
 
+import org.hibernate.annotations.ManyToAny;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Book {
-	@Id
+	@Id // Primary key -määritys
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
@@ -17,6 +22,11 @@ public class Book {
 	private int year;
 	private int isbn;
 	private double price;
+	
+	// Book *--1 Category
+	@ManyToOne
+	@JoinColumn(name = "categoryid") // Foreign key -määritys
+	private Category category;
 	
 	public Book() {
 		super();
@@ -37,7 +47,7 @@ public class Book {
 		this.price = price;
 	}
 	
-	public Book(Long id, String title, String author, int year, int isbn, double price) {
+	public Book(Long id, String title, String author, int year, int isbn, double price, Category category) {
 	super();
 	this.id = id;
 	this.title = title;
@@ -45,6 +55,7 @@ public class Book {
 	this.year = year;
 	this.isbn = isbn;
 	this.price = price;
+	this.category = category;
 	}
 	
 	public Long getId() {
@@ -95,10 +106,27 @@ public class Book {
 		this.price = price;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
 				+ ", price=" + price + "]";
+	}
+	
+	public String toString2() {
+		if (this.category != null)
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+					+ ", price=" + price + " category =" + this.getCategory() + "]";
+		else
+			return "Book [id=" + id + ", title=" + title + ", author=" + author + ", year=" + year + ", isbn=" + isbn
+					+ ", price=" + price + "]";
 	}
 	
 	
