@@ -37,11 +37,13 @@ public class BookstoreApplication {
 			Category category5 = new Category("Self help");
 			categoryrepository.save(category5);
 			
-			bookRepository.save(new Book(null, "Opi ajamaan", "Heino Heinänen", 2005, 8795, 30, category5));
-			Book book1 = new Book(null, "Synkkä yö", "Kirsi Kirjailija", 2020, 1224, 15.5, category1);
-			Book book2 = new Book("Aamurusko", "Niina Näpyttäjä", 2010, 2345, 20.5);
-			bookRepository.save(book1); // SQL Insert
-			bookRepository.save(book2); // SQL Insert
+			bookRepository.save(new Book("Opi ajamaan", "Heino Heinänen", 2005, 8795, 30, category5));
+			bookRepository.save(new Book("Synkkä yö", "Kirsi Kirjailija", 2020, 1224, 15.5, category1));
+			bookRepository.save(new Book("Aamurusko", "Niina Näpyttäjä", 2010, 2345, 20.5, category3));
+			//Book book1 = new Book(null, "Synkkä yö", "Kirsi Kirjailija", 2020, 1224, 15.5, category1);
+			//Book book2 = new Book("Aamurusko", "Niina Näpyttäjä", 2010, 2345, 20.5);
+			//bookRepository.save(book1); // SQL Insert
+			//bookRepository.save(book2); // SQL Insert
 			
 			//haetaan tietokannasta autot
 			List<Book> books = (List<Book>) bookRepository.findAll();

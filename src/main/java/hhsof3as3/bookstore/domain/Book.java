@@ -38,13 +38,14 @@ public class Book {
 		this.price = 0;
 	}
 
-	public Book(String title, String author, int year, int isbn, double price) {
+	public Book(String title, String author, int year, int isbn, double price, Category category) {
 		super();
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.isbn = isbn;
 		this.price = price;
+		this.category = category;
 	}
 	
 	public Book(Long id, String title, String author, int year, int isbn, double price, Category category) {
