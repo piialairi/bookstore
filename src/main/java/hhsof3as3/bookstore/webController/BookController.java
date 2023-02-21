@@ -3,6 +3,7 @@ package hhsof3as3.bookstore.webController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import hhsof3as3.bookstore.domain.Book;
 import hhsof3as3.bookstore.domain.BookRepository;
+import hhsof3as3.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
-@Autowired
-	
+	@Autowired
 	private BookRepository bookRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	@RequestMapping("/index")
 	public String Bookstore() {
@@ -35,6 +39,7 @@ public class BookController {
 	@RequestMapping(value = "/addbook")
 	public String addBook(Model model) {
 		model.addAttribute("book", new Book());
+		model.addAttribute("categorys", categoryRepository.findAll());
 		return "addbook"; // html
 	}
 	
