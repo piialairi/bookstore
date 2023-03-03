@@ -1,14 +1,17 @@
 package hhsof3as3.bookstore.webController;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import hhsof3as3.bookstore.domain.Book;
 import hhsof3as3.bookstore.domain.BookRepository;
@@ -33,6 +36,18 @@ public class BookController {
 		model.addAttribute("books", books); // välitetään kirjalista templatelle model-olion avulla
 		//model.addAttribute("books", bookRepository.findAll());
 		return "booklist"; // .html
+	}
+	
+	//REST-metodi get all books
+	@GetMapping("/books")
+	public @ResponseBody List<Book> getBooks(){
+		return (List<Book>) bookRepository.findAll();
+	}
+	
+	// REST-metodi, get book by id
+	@GetMapping(value="/books/{id}")
+	public @ResponseBody Optional<Book> findBookRest(@PathVariable("id") Long bookId){
+		return bookRepository.findById(bookId);
 	}
 	
 	// lisäys

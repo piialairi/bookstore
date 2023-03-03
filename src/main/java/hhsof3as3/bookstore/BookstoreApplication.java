@@ -46,7 +46,7 @@ public class BookstoreApplication {
 			//bookRepository.save(book2); // SQL Insert
 			
 			//haetaan tietokannasta autot
-			List<Book> books = (List<Book>) bookRepository.findAll();
+			//List<Book> books = (List<Book>) bookRepository.findAll();
 			log.info("save some sample books");
 			for (Book book : bookRepository.findAll()) {
 				log.info(book.toString2());
@@ -54,6 +54,11 @@ public class BookstoreApplication {
 			/*for (Book book : books) {
 				System.out.println(book.toString());
 			}*/
+			
+			log.info("fetch all books");
+			for (Book book : bookRepository.findAll()) {
+				log.info(book.toString2());
+			}
 		};
 		
 	}

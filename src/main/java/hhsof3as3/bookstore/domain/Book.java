@@ -3,6 +3,8 @@ package hhsof3as3.bookstore.domain;
 import org.hibernate.annotations.ManyToAny;
 import org.springframework.jmx.export.annotation.ManagedAttribute;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,7 @@ public class Book {
 	
 	// Book *--1 Category
 	@ManyToOne
+	@JsonIgnoreProperties (value = "books")
 	@JoinColumn(name = "categoryid") // Foreign key -määritys
 	private Category category;
 	
