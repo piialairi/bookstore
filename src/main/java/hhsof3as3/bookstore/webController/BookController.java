@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,6 +84,7 @@ public class BookController {
 	
 	// kirjan poisto
 	@RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long bookId, Model model) {
 		bookRepository.deleteById(bookId);
 		return "redirect:../booklist";
@@ -96,5 +98,10 @@ public class BookController {
 		return "editbook";
 		
 	}
+
+   @RequestMapping(value="/login") // tätä ei tarvitse käyttää, vaan voi käyttää Springin omaa kirjautumista
+	public String login() {
+		return "login";
+	} 
 		
 }
