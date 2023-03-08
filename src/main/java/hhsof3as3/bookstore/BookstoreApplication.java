@@ -13,6 +13,8 @@ import hhsof3as3.bookstore.domain.Book;
 import hhsof3as3.bookstore.domain.BookRepository;
 import hhsof3as3.bookstore.domain.Category;
 import hhsof3as3.bookstore.domain.CategoryRepository;
+import hhsof3as3.bookstore.domain.User;
+import hhsof3as3.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -23,7 +25,7 @@ public class BookstoreApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner demoData(BookRepository bookRepository, CategoryRepository categoryrepository) {
+	public CommandLineRunner demoData(BookRepository bookRepository, CategoryRepository categoryrepository, UserRepository userRepository) {
 		return (args) ->{
 			log.info("save some sample categories");
 			Category category1 = new Category("Scifi");
@@ -44,6 +46,12 @@ public class BookstoreApplication {
 			//Book book2 = new Book("Aamurusko", "Niina Näpyttäjä", 2010, 2345, 20.5);
 			//bookRepository.save(book1); // SQL Insert
 			//bookRepository.save(book2); // SQL Insert
+			
+			// Create users: admin/admin user/user
+			User user1 = new User("user", "$2a$10$DH3euuKdm/RqyuCbIIex..vAcUMfnIrTjl/B.BXu9arPKQ2aWRYBm", "USER");
+			User user2 = new User("admin", "$2a$10$WyaUFvJNZmj.Oca6wDepP.ytqOq3/XaXXM8ubvHx.XTMqH3izf8JK", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
 			
 			//haetaan tietokannasta autot
 			//List<Book> books = (List<Book>) bookRepository.findAll();
